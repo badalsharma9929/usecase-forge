@@ -1,0 +1,46 @@
+[project]
+name = "usecase-forge"
+version = "1.0.0"
+description = "Multi-agent system that turns a company website into grounded GenAI/ML use cases with matching public datasets."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "langgraph>=1.2",
+    "langchain-core>=1.8",
+    "langchain-google-genai>=4.5",
+    "huggingface_hub>=2.4",
+    "kaggle>=2.2",
+    "six",
+    "numpy",
+    "requests",
+    "python-dotenv",
+    "fastapi>=0.120",
+    "vercel>=0.13",
+    "cryptography",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9", "httpx", "uvicorn"]
+
+[project.scripts]
+usecase-forge = "usecase_forge.__main__:main"
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["usecase_forge", "usecase_forge.tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# --- Vercel -------------------------------------------------------------------
+# The FastAPI app serves /api/*; public/ is served by the CDN.
+[tool.vercel]
+entrypoint = "usecase_forge.web:app"
+
+# Queue consumer: one agent step per message (private function, no public URL).
+[[tool.vercel.subscribers]]
+entrypoint = "usecase_forge.worker"

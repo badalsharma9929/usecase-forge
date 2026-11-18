@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UseCaseForge: AI use cases from any company website</title>
+  <meta name="description" content="Five AI agents read a company's website, propose grounded GenAI and ML use cases, critique them, and find public datasets to prototype with.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="/" aria-label="UseCaseForge home">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 16.5h7M16.5 13v7" stroke="currentColor" stroke-width="2"/></svg>
+        <span>UseCaseForge</span>
+      </a>
+      <p class="tagline">Grounded AI use cases from a company's own website</p>
+      <a class="header-link" href="https://github.com/badalsharma9929/usecase-forge" rel="noopener">Source</a>
+    </div>
+  </header>
+
+  <main id="main" class="wrap layout">
+    <!-- Left rail: input + live pipeline -->
+    <aside class="rail" aria-label="Run settings and progress">
+      <form id="run-form" class="panel" novalidate>
+        <h1 class="panel-title">Analyse a company</h1>
+
+        <div class="field">
+          <label for="url">Company website</label>
+          <input id="url" name="url" type="text" inputmode="url" autocomplete="url"
+                 placeholder="https://www.zomato.com" required aria-describedby="url-help url-error">
+          <p id="url-help" class="help">Homepage works best. Try
+            <button type="button" class="link-btn" data-example="https://byjus.com/">byjus.com</button>,
+            <button type="button" class="link-btn" data-example="https://www.zomato.com/">zomato.com</button> or
+            <button type="button" class="link-btn" data-example="https://www.tatamotors.com/">tatamotors.com</button>.
+          </p>
+          <p id="url-error" class="field-error" role="alert" hidden></p>
+        </div>
+
+        <details class="more">
+          <summary>More pages <span class="muted">(optional)</span></summary>
+          <div class="field">
+            <label for="extra">Extra pages, one per line</label>
+            <textarea id="extra" name="extra" rows="3" placeholder="https://www.zomato.com/about"></textarea>
+            <p class="help">An About or Products page gives the agents more evidence. Max 3.</p>
+          </div>
+        </details>
+
+        <details class="more" id="key-details">
+          <summary>Use your own Gemini key <span class="muted">(optional)</span></summary>
+          <div class="field">
+            <label for="api-key">Gemini API key</label>
+            <input id="api-key" name="api-key" type="password" autocomplete="off" spellcheck="false"
+                   aria-describedby="key-help">
+            <p id="key-help" class="help">Free at <a href="https://aistudio.google.com/apikey" rel="noopener" target="_blank">aistudio.google.com</a>.
+              Sent encrypted to run your job, never stored.</p>
+          </div>
+        </details>
+
+        <button id="submit" class="btn btn-primary" type="submit">Generate use cases</button>
+        <p id="quota" class="quota muted" aria-live="polite"></p>
+      </form>
+
+      <section id="progress" class="panel" aria-labelledby="progress-title" hidden>
+        <div class="panel-head">
+          <h2 id="progress-title" class="panel-title">Agents</h2>
+          <span id="elapsed" class="muted mono"></span>
+        </div>
+        <ol id="steps" class="steps"></ol>
+        <p id="notice" class="notice" role="status" hidden></p>
+      </section>
+    </aside>
+
+    <!-- Results -->
+    <section id="results" class="results" aria-live="polite" aria-busy="false">
+      <div id="intro" class="intro">
+        <h2>How it works</h2>
+        <ol class="how">
+          <li><strong>Researcher</strong> reads the site and builds a company profile.</li>
+          <li><strong>Strategist</strong> drafts use cases, each citing passages from the site.</li>
+          <li><strong>Critic</strong> scores the plan from 1 to 10 and sends weak plans back for revision.</li>
+          <li><strong>Dataset scout</strong> searches Hugging Face and Kaggle and keeps only relevant datasets.</li>
+          <li><strong>Reporter</strong> assembles a report you can download or share.</li>
+        </ol>
+        <p class="muted">A run usually takes 2 to 5 minutes. You can leave this page; the link in your address bar brings you back to the results.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="muted">Built with LangGraph, Gemini and Vercel. Use cases are AI-generated starting points; validate them before you build.</p>
+    </div>
+  </footer>
+</body>
+</html>

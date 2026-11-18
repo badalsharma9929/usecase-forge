@@ -1,0 +1,6 @@
+.venv
+.env
+output
+legacy
+tests
+**/__pycache__
