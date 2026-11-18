@@ -6,7 +6,7 @@ Five AI agents read the company's own site, draft use cases that cite the passag
 based on, critique and revise the plan, then search Hugging Face and Kaggle for datasets
 that actually fit. It runs as a serverless web app on Vercel, with a live view of every agent.
 
-**Live demo:** https://usecase-forge-sharmabadal9929-7523s-projects.vercel.app
+**Live demo:** https://usecase-forge.vercel.app
 
 ---
 

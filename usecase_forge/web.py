@@ -113,7 +113,12 @@ def _rate_limited(client: str) -> bool:
 
 # --- API ----------------------------------------------------------------------
 
-app = FastAPI(title="UseCaseForge API", docs_url="/api/docs", openapi_url="/api/openapi.json")
+# Swagger UI loads scripts from a CDN, which the production CSP blocks; keep it local-only.
+app = FastAPI(
+    title="UseCaseForge API",
+    docs_url=None if ON_VERCEL else "/api/docs",
+    openapi_url="/api/openapi.json",
+)
 
 
 SECURITY_HEADERS = {
