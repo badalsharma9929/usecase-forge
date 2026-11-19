@@ -19,7 +19,7 @@ flowchart LR
     runs --> graphmod[graph.py<br/>run_step / next_step]
     runs --> store[store.py<br/>Blob / Memory]
     runs --> vault[keyvault.py]
-    cli[__main__.py] --> graph
+    cli[__main__.py] --> graphmod
     graphmod --> agents[agents.py]
     agents --> rag[rag.py]
     agents --> schemas[schemas.py]
