@@ -16,18 +16,18 @@ This document describes each module, its main functions, data structures and alg
 flowchart LR
     web[web.py<br/>FastAPI] --> runs[runs.py<br/>RunService]
     worker[worker.py<br/>queue consumer] --> runs
-    runs --> graph[graph.py<br/>run_step / next_step]
+    runs --> graphmod[graph.py<br/>run_step / next_step]
     runs --> store[store.py<br/>Blob / Memory]
     runs --> vault[keyvault.py]
     cli[__main__.py] --> graph
-    graph --> agents[agents.py]
+    graphmod --> agents[agents.py]
     agents --> rag[rag.py]
     agents --> schemas[schemas.py]
     agents --> state[state.py]
-    graph --> tools_web[tools/web.py]
-    graph --> tools_ds[tools/datasets.py]
+    graphmod --> tools_web[tools/web.py]
+    graphmod --> tools_ds[tools/datasets.py]
     web --> demo[demo.py]
-    graph --> config[config.py]
+    graphmod --> config[config.py]
 ```
 
 | Module | Main symbols |
